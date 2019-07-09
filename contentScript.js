@@ -10,7 +10,11 @@
 // @grant none
 // ==/UserScript==
 //
+
+var youtubeRe = /^https?:\/\/www.youtube.com\//;
+
 function addDisable(url, always) {
+    if (!youtubeRe.test(url)) { return; }
     if (url.indexOf("disable_polymer") === -1) {
         if (url.indexOf("?") > 0) {
             url += "&";
@@ -44,8 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (from) {
             var url = from.href;
             if (!(url.match("/embed/") || url === location.href)) {
-                redirectTo(addDisable(url, true));
-                return false;
+                url = addDisable(url, true);
+                if (url) {
+                    from.href = url;
+                }
             }
         }
     };
