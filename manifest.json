@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Disable Polymer for YT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "default_locale": "en",
   "description": "Disable Polymer UI for YouTube",
   "author": "Igor null",
@@ -10,6 +10,8 @@
   },
   "content_scripts": [{
      "matches": ["http://www.youtube.com/*", "https://www.youtube.com/*"],
+     "exclude_matches": ["http://www.youtube.com/embed/*", "https://www.youtube.com/embed/*"],
+     "run_at": "document_start",
      "js": ["contentScript.js"]
   }]
 }
